@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='upload_styles.css') }}">
+</head>
+<body style="background: url('{{ url_for('static', filename='background.jpeg') }}') no-repeat center center fixed; background-size: cover;">
+
+    <div class="container">
+        <h2>🍃 PlantPulse</h2>
+        <p class="subtext">Upload images to identify plant diseases with AI.</p>
+
+        <form id="uploadForm" action="/" method="post" enctype="multipart/form-data">
+            <!-- Custom File Upload -->
+            <label for="file-upload" class="custom-file-upload">
+                📂 Choose Images
+            </label>
+            <input type="file" name="files" id="file-upload" multiple required>
+
+            <!-- Show selected file names -->
+            <p id="file-names">No files chosen</p>
+
+            <!-- Error Message -->
+            <p id="error-message" style="color: red; display: none;"></p>
+
+            <!-- Live Image Preview -->
+            <div id="image-preview"></div>
+
+            <br><br>
+            <button type="submit" id="upload-btn">🚀 Upload & Predict</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='upload_script.js') }}"></script>
+
+</body>
+</html>

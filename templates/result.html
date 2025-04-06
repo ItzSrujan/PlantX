@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result_styles.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>🌱 Prediction Results</h2>
+
+        {% if results %}
+            <h3>📷 Uploaded Images & Predictions:</h3>
+            <div class="results-container">
+                {% for result in results %}
+                    <div class="result-box">
+                        <img src="data:image/jpeg;base64,{{ result['image'] }}" alt="Uploaded Image">
+                        <p><strong>🌿 Class:</strong> <span class="predicted-class">{{ result['disease'] }}</span></p>
+                        <p><strong>🔹 Confidence:</strong> <span class="confidence">{{ result['confidence'] }}</span></p>
+                        <p><strong>⏳ Time Taken:</strong> <span class="time-taken">{{ result['time_taken'] }}</span></p>
+                        
+                        <!-- Disease Info Section -->
+                        <div class="info-box">
+                            <p><strong>📜 Description:</strong></p>
+                            <pre class="disease-info toggle-text" data-expanded="false">{{ result['disease_info'] }}</pre>
+                            <button class="read-more-btn" onclick="toggleText(this)">Read more</button>
+                          
+                            <p><strong>🦠 Cause:</strong></p>
+                            <pre class="disease-info toggle-text" data-expanded="false">{{ result['cause'] }}</pre>
+                            <button class="read-more-btn" onclick="toggleText(this)">Read more</button>
+                          
+                            <p><strong>💊 Treatment:</strong></p>
+                            <pre class="disease-info toggle-text" data-expanded="false">{{ result['treatment']|safe }}</pre>
+                            <button class="read-more-btn" onclick="toggleText(this)">Read more</button>
+                          </div>
+                                           
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Copy Results Button -->
+        {% endif %}
+
+        <br>
+        <a href="/" id="upload-again">⬆️ Upload More Images</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='result_script.js') }}"></script>
+
+</body>
+</html>
